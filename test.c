@@ -13,8 +13,13 @@ typedef struct {
 } test_result_t;
 
 int test_function(test_result_t *result) {
-    // 调用函数
-    result->ret_val = result->function_ptr();
+
+    if (result->function_ptr() != -1) {
+        result->ret_val = 0;
+    } else {
+        result->ret_val = 1;
+    }
+
     return 0;
 }
 
