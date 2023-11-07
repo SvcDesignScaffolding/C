@@ -27,15 +27,17 @@ int main() {
         {"get_disk_info",      get_disk_info,   0},
     };
 
+    int num = (int)sizeof(results) / sizeof(results[0]);
+
     // 循环测试每个函数
-    for (int i = 0; i < sizeof(results) / sizeof(results[0]); i++) {
+    for (int i = 0; i < num; i++) {
         // 调用测试函数
         test_function(&results[i]);
     }
 
     // 统计测试结果
     int success_count = 0;
-    for (int i = 0; i < sizeof(results) / sizeof(results[0]); i++) {
+    for (int i = 0; i < num; i++) {
         if (results[i].ret_val == 0) {
             success_count++;
         }
@@ -43,12 +45,12 @@ int main() {
 
     // 输出测试结果
     printf("测试结果：\n");
-    for (int i = 0; i < sizeof(results) / sizeof(results[0]); i++) {
+    for (int i = 0; i < num; i++) {
         printf("    函数名：%s，测试结果：%s\n", results[i].function_name, results[i].ret_val == 0 ? "成功" : "失败");
     }
 
     // 判断测试结果
-    if (success_count == sizeof(results) / sizeof(results[0])) {
+    if ( success_count == num ) {
         printf("测试全部完成\n");
     } else {
         printf("测试未通过\n");
