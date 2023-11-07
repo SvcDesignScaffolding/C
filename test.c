@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lib/get_cpu_info.c"
+#include "lib/get_mem_info.c"
 #include "lib/get_disk_info.c"
-#include "lib/get_memory_info.c"
 #include "lib/get_system_version.c"
 
 typedef struct {

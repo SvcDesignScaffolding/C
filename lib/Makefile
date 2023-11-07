@@ -2,8 +2,8 @@
 TARGET = libosinfo.a
 
 # 定义文件列表
-SRCS = get_cpu_info.c get_disk_info.c get_memory_info.c get_system_version.c
-OBJS = get_cpu_info.o get_disk_info.o get_memory_info.o get_system_version.o
+SRCS = get_cpu_info.c get_disk_info.c get_mem_info.c get_system_version.c
+OBJS = get_cpu_info.o get_disk_info.o get_mem_info.o get_system_version.o
 
 # 定义编译命令
 CC = gcc
