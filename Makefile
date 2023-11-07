@@ -17,7 +17,7 @@ $(TARGET): $(SRCS)
 
 # 测试
 test:
-	gcc -o test test.c
+	$(CC) $(CFLAGS) -o test test.c
 	./test
 
 # 清理规则

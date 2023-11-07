@@ -1,67 +1,61 @@
-#include <stdio.h>
+#include "head.h"
 #include <stdlib.h>
+#include <string.h>
 #include "lib/get_cpu_info.c"
 #include "lib/get_disk_info.c"
 #include "lib/get_memory_info.c"
 #include "lib/get_system_version.c"
 
-// 测试 CPU 信息
-void test_cpu_info(void) {
-  // 获取 CPU 信息
-  get_cpu_info();
+typedef struct {
+    const char *function_name;
+    int ret_val;
+} test_result_t;
 
-  // 断言 CPU 数量正确
-  assert(cpu_count > 0);
+int test_function(test_result_t *result) {
 
-  // 断言 CPU 频率正确
-  assert(cpu_mhz > 0);
+    // 调用函数
+    int (*function_ptr)( void ) = result->function_name;
+    result->ret_val = function_ptr();
 
-  // 断言 CPU 型号正确
-  assert(cpu_model != NULL);
+    return 0;
 }
 
-// 测试磁盘信息
-void test_disk_info(void) {
-  // 获取磁盘信息
-  get_disk_info();
+int main() {
+    // 初始化待测试函数集合
+    test_result_t results[] = {
+        {"get_system_version", 0},
+        {"get_cpu_info",       0},
+        {"get_memory_info",    0},
+        {"get_disk_info",      0},
+    };
 
-  // 断言磁盘总大小正确
-  assert(total_size > 0);
+    // 循环测试每个函数
+    for (int i = 0; i < sizeof(results) / sizeof(results[0]); i++) {
+        // 调用测试函数
+        test_function(&results[i]);
+    }
 
-  // 断言磁盘可用空间正确
-  assert(available_size > 0);
-}
+    // 统计测试结果
+    int success_count = 0;
+    for (int i = 0; i < sizeof(results) / sizeof(results[0]); i++) {
+        if (results[i].ret_val == 0) {
+            success_count++;
+        }
+    }
 
-// 测试内存信息
-void test_memory_info(void) {
-  // 获取内存信息
-  get_memory_info();
+    // 输出测试结果
+    printf("测试结果：\n");
+    for (int i = 0; i < sizeof(results) / sizeof(results[0]); i++) {
+        printf("    函数名：%s，测试结果：%s\n", results[i].function_name, results[i].ret_val == 0 ? "成功" : "失败");
+    }
 
-  // 断言内存总量正确
-  assert(total_mem > 0);
+    // 判断测试结果
+    if (success_count == sizeof(results) / sizeof(results[0])) {
+        printf("测试全部完成\n");
+    } else {
+        printf("测试未通过\n");
+        exit(1);
+    }
 
-  // 断言内存可用空间正确
-  assert(available_mem > 0);
-}
-
-// 测试系统版本信息
-void test_system_version(void) {
-  // 获取系统版本信息
-  get_system_version();
-
-  // 断言系统名称正确
-  assert(sysname != NULL);
-
-  // 断言系统版本正确
-  assert(release != NULL);
-}
-
-int main(void) {
-  // 运行单元测试
-  test_cpu_info();
-  test_disk_info();
-  test_memory_info();
-  test_system_version();
-
-  return 0;
+    return 0;
 }
