@@ -1,0 +1,64 @@
+name: Build and Test
+
+on:
+  pull_request:
+  push:
+    paths:
+      - '.github/workflows/pipieline.yaml'
+  workflow_dispatch:
+    branches:
+      - main
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc libc6-dev make
+
+      - name: Build
+        run: |
+          make
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc libc6-dev make
+
+      - name: Run tests
+        run: |
+          make test
+  docker-image:
+    runs-on: ubuntu-latest
+    name: Build debain-c-sysinfo image
+    needs: [test]
+    steps:
+      - uses: actions/checkout@master
+
+      - name: 'Artifact: build && push debian-c-sysinfo image'
+        uses: aevea/action-kaniko@master
+        with:
+          registry: artifact.onwalk.net
+          username: admin
+          password: ${{ secrets.HELM_REPO_PASSWORD }}
+          path: './'
+          build_file: 'Dockerfile'
+          image: base/debian-c-sysinfo
+          tag: 0.1
+          cache: true
+          cache_registry: cache
