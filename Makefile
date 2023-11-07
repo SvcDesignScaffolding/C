@@ -8,12 +8,19 @@ SRCS = main.c
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -std=c11 -I./include
 
+# 定义 debug 模式
+DEBUG = no
+
 # 编译目标文件
 all: $(TARGET)
 
 $(TARGET): $(SRCS)
 	make -C lib
 	$(CC) $(CFLAGS) -o $@ $(SRCS) -L./lib -losinfo 
+ifeq ($(DEBUG), yes)
+	ldd ./sysinfo
+	./sysinfo
+endif
 
 # 测试
 test:
