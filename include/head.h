@@ -13,7 +13,7 @@ void get_system_version();
 void get_cpu_info(void);
 
 // Function declarations for memory information
-void get_memory_info(void);
+void get_mem_info(void);
 
 // Function declarations for disk information
 void get_disk_info(void);

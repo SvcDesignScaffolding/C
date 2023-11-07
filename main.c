@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
 
   // 获取 CPU/Mem 信息
   get_cpu_info();
-  get_memory_info();
+  get_mem_info();
 
   // 获取系统磁盘信息
   get_disk_info();

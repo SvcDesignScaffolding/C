@@ -6,7 +6,7 @@
 #include <sys/sysinfo.h>
 
 // 函数定义
-void get_memory_info(void) {
+void get_mem_info(void) {
 
   // 获取内存信息
   struct sysinfo sysinfo;

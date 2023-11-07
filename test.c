@@ -25,7 +25,7 @@ int main() {
     test_result_t results[] = {
         {"get_system_version", 0},
         {"get_cpu_info",       0},
-        {"get_memory_info",    0},
+        {"get_mem_info",       0},
         {"get_disk_info",      0},
     };
 
