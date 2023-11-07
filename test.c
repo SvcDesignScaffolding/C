@@ -8,25 +8,23 @@
 
 typedef struct {
     const char *function_name;
+    int (*function_ptr)(void);
     int ret_val;
 } test_result_t;
 
 int test_function(test_result_t *result) {
-
     // 调用函数
-    int (*function_ptr)( void ) = result->function_name;
-    result->ret_val = function_ptr();
-
+    result->ret_val = result->function_ptr();
     return 0;
 }
 
 int main() {
     // 初始化待测试函数集合
     test_result_t results[] = {
-        {"get_system_version", 0},
-        {"get_cpu_info",       0},
-        {"get_mem_info",       0},
-        {"get_disk_info",      0},
+        {"get_system_version", get_system_version, 0},
+        {"get_cpu_info",       get_cpu_info,    0},
+        {"get_mem_info",       get_mem_info,    0},
+        {"get_disk_info",      get_disk_info,   0},
     };
 
     // 循环测试每个函数
