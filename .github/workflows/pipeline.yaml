@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     paths:
+      - 'Dockerfile'
       - '.github/workflows/pipieline.yaml'
   workflow_dispatch:
     branches:

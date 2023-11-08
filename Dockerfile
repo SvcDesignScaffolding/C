@@ -19,4 +19,4 @@ FROM debian:latest as prod
 COPY --from=builder /usr/bin/sysinfo /usr/bin/sysinfo
 
 # 运行程序
-CMD ["sysinfo"]
+CMD ["/bin/sh"]
