@@ -72,8 +72,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 更新 submodules
-        run: git submodule update --init --recursive --all
+      - name: update submodule
+        run: |
+          sudo apt-get update && sudo apt-get install -y git && git submodule update --init --recursive
 
       - name: Setup K3S Cluster
         working-directory: ./scripts
@@ -110,8 +111,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 更新 submodules
-        run: git submodule update --init --recursive --all
+      - name: update submodule
+        run: |
+          sudo apt-get update && sudo apt-get install -y git && git submodule update --init --recursive
 
       - name: Deploy
         working-directory: ./scripts
