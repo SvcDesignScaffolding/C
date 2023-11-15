@@ -32,6 +32,18 @@ jobs:
         run: |
           make DEBUG=no
 
+      - name: Tar files
+        run: tar -czvf sysinfo.tar.gz sysinfo
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          asset_name: sysinfo
+          file: sysinfo.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
+
   test:
     runs-on: ubuntu-latest
 
