@@ -44,11 +44,6 @@ Makefile
 - make clean
   - 清理构建目录，以便全新构建，或者提交代码
 
-# 制品下载地址
-1. GitHub Release: https://github.com/scaffolding-design/c/releases/tag/main
-2. 容器镜像仓库  : artifact.onwalk.net/base/scaffolding-design/c:<git_commit_id>
-其中，<git_commit_id> 是 Git 提交 ID。
-
 # 测试验证
 
 运行 sysinfo  可执行文件，可以验证库中的函数是否正常工作：
@@ -98,3 +93,8 @@ CPU 频率：2.40 GHz
 1. 获取网卡信息
 2. 获取进程信息
 3. 获取文件系统信息
+
+# 制品下载地址
+1. GitHub Release: https://github.com/scaffolding-design/c/releases/tag/main
+2. 容器镜像仓库  : artifact.onwalk.net/base/scaffolding-design/c:<git_commit_id>
+其中，<git_commit_id> 是 Git 提交 ID。
